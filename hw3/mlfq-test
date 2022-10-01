@@ -1,0 +1,85 @@
+Test Examples for my MLFQ:
+
+test1:
+Enter no of processes:3
+Enter the arrival time process A: 0
+Enter work length of process A: 4
+Enter the arrival time process B: 0
+Enter work length of process B: 100
+Enter the arrival time process C: 5
+Enter work length of process C: 120
+Process end in first queue following RR with qt = 5
+Process                 Reponse Time            Turnarround Time
+A                       0                       4
+Process end in second queue following RR with qt = 10
+Process                 Reponse Time            Turnarround Time
+Process end in third queue following RR with qt = 20
+Process                 Reponse Time            Turnarround Time
+B                       4                       199
+C                       4                       219
+
+
+test2:
+Enter no of processes:2
+Enter the arrival time process A: 0
+Enter work length of process A: 4
+Enter the arrival time process B: 0
+Enter work length of process B: 8
+Process end in first queue following RR with qt = 5
+Process                 Reponse Time            Turnarround Time
+A                       0                       4
+Process end in second queue following RR with qt = 10
+Process                 Reponse Time            Turnarround Time
+B                       4                       12
+
+
+test3:
+Enter no of processes:2
+Enter the arrival time process A: 0
+Enter work length of process A: 8
+Enter the arrival time process B: 0
+Enter work length of process B: 8
+Process end in first queue following RR with qt = 5
+Process                 Reponse Time            Turnarround Time
+Process end in second queue following RR with qt = 10
+Process                 Reponse Time            Turnarround Time
+A                       0                       13
+B                       5                       16
+
+
+test4:
+Enter no of processes:3
+Enter the arrival time process A: 0
+Enter work length of process A: 10
+Enter the arrival time process B: 0
+Enter work length of process B: 100
+Enter the arrival time process C: 20
+Enter work length of process C: 100
+Process end in first queue following RR with qt = 5
+Process                 Reponse Time            Turnarround Time
+Process end in second queue following RR with qt = 10
+Process                 Reponse Time            Turnarround Time
+A                       0                       20
+Process end in third queue following RR with qt = 20
+Process                 Reponse Time            Turnarround Time
+B                       5                       205
+C                       0                       190
+
+
+test5:
+Enter no of processes:3
+Enter the arrival time process A: 0
+Enter work length of process A: 20
+Enter the arrival time process B: 4
+Enter work length of process B: 20
+Enter the arrival time process C: 5
+Enter work length of process C: 20
+Process end in first queue following RR with qt = 5
+Process                 Reponse Time            Turnarround Time
+Process end in second queue following RR with qt = 10
+Process                 Reponse Time            Turnarround Time
+Process end in third queue following RR with qt = 20
+Process                 Reponse Time            Turnarround Time
+A                       0                       50
+B                       1                       51
+C                       5                       55
