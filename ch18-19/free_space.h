@@ -224,35 +224,88 @@ int malloc(char type, int data_size, dll_t* l){
 				num++;
 			}
 			else {
-				node_t* pre = p->previous;
-				node_t* next = p->next;
-				node_t* task = create_node(data_size);
-				task->status = true;
-				node_t* space = create_node(p->size - data_size);
-				task->next = space;
-				space->previous = task;
-				task->previous = task;
-				l->size -= data_size;
-				l->count += 1;
-
-				if(pre) {
-					pre->next = task;
-					task->previous = pre;
-				} else l->head = task;
-
-				if(next) {
-					space->next = next;
-					next->previous = space;
-				} else l->tail = space;
-				printf("Malloc successfully in the NO.%d chunk! The task size is %d\n", num, data_size);
-				return num;
+				break; //travse part of chunks. the performance is fast
 			}
 		}
+	} else if (type == 'B') {
+		node_t* bp = new node_t;
+		int bpos = -1;
+		int min_gap = INT_MAX;
+		// traverse all of chunks, proformance would be slow.
+		while(p) {
+			if (data_size > p->size || p->status == true) {
+				p = p->next;
+				num++;
+			}
+			else {
+				int cur_gap = p->size - data_size;
+				if (cur_gap < min_gap){
+					min_gap = cur_gap;
+					bp = p;
+					bpos = num;
+				}
+				p = p->next;
+				num++;
+			}			
+		}
+		if(bpos != -1) {
+			p = bp;
+			num = bpos;
+		}
+	} else if (type == 'W') {
+		node_t* wp = new node_t;
+		int wpos = -1;
+		int max_gap = INT_MIN;
+		// traverse all of chunks, proformance would be slow.
+		while(p) {
+			if (data_size > p->size || p->status == true) {
+				p = p->next;
+				num++;
+			}
+			else {
+				int cur_gap = p->size - data_size;
+				if (cur_gap > max_gap){
+					max_gap = cur_gap;
+					wp = p;
+					wpos = num;
+				}
+				p = p->next;
+				num++;
+			}			
+		}
+		if(wpos != -1) {
+			p = wp;
+			num = wpos;
+		}
 	}
+
+	if (p) {
+		node_t* pre = p->previous;
+		node_t* next = p->next;
+		node_t* task = create_node(data_size);
+		task->status = true;
+		node_t* space = create_node(p->size - data_size);
+		task->next = space;
+		space->previous = task;
+		task->previous = task;
+		l->size -= data_size;
+		l->count += 1;
+
+		if(pre) {
+			pre->next = task;
+			task->previous = pre;
+		} else l->head = task;
+
+		if(next) {
+			space->next = next;
+			next->previous = space;
+		} else l->tail = space;
+		printf("Malloc successfully in the NO.%d chunk! The task size is %d\n", num, data_size);
+		return num;
+	}
+
 	printf("Malloc failed, there is not enough space!\n");
 	return -1;
-
-
 }
 
 void print_freelist(node_t* p) {
@@ -281,7 +334,7 @@ int free(dll_t* l, int pos){
 	} else {
 		p->status = false;
 		l->size += p->size;
-		printf("Free the NO.%d chunk successfully!\n", pos);
+		printf("Free the NO.%d chunk successfully! Size is %d.\n", pos, p->size);
 	}
 
 	return pos;
