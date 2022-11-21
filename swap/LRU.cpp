@@ -69,7 +69,7 @@ public:
 
 
 int main(){
-    LRUCache *lRUCache = new LRUCache(2);
+    LRUCache *lRUCache = new LRUCache(3);
     lRUCache->put(1, 1);
     lRUCache->put(2, 2);    
     int get1 = lRUCache->get(1);    // return 1
